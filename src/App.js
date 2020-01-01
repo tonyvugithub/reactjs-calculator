@@ -21,7 +21,7 @@ class CalculatorApp extends React.Component {
 
   //Function to determine scenarios when hit equal "="
   calculateSequence() {
-    const res = this.state.result;
+    let res = this.state.result;
     const seq = this.state.sequence;
     let calSeq = seq + res;
     calSeq = calSeq.replace(/x/g, "*");
@@ -31,11 +31,11 @@ class CalculatorApp extends React.Component {
       let baseNum = match.slice(1);
       return "Math.sqrt(".concat(baseNum, ")");
     });
-    calSeq = calSeq.replace(/\(\d*\/?\d*\.?\d+\)²/g, match => {
+    calSeq = calSeq.replace(/\(-?\d*\/?-?\d*\.?\d+\)²/g, match => {
       let baseNum = match.slice(0, -1);
       return "(".concat(baseNum, "*", baseNum, ")");
     });
-    calSeq = calSeq.replace(/\(\d*\/?\d*\.?\d+\)³/g, match => {
+    calSeq = calSeq.replace(/\(-?\d*\/?-?\d*\.?\d+\)³/g, match => {
       let baseNum = match.slice(0, -1);
       return "(".concat(baseNum, "*", baseNum, "*", baseNum, ")");
     });
@@ -49,11 +49,24 @@ class CalculatorApp extends React.Component {
         tempVal: ""
       });
     } else {
+      let resTemp = res.replace(/√\d*\.?\d+/g, match => {
+        let baseNum = match.slice(1);
+        return "Math.sqrt(".concat(baseNum, ")");
+      });
+      resTemp = resTemp.replace(/\(-?\d*\/?-?\d*\.?\d+\)²/g, match => {
+        let baseNum = match.slice(0, -1);
+        return "(".concat(baseNum, "*", baseNum, ")");
+      });
+      resTemp = resTemp.replace(/\(-?\d*\/?-?\d*\.?\d+\)³/g, match => {
+        let baseNum = match.slice(0, -1);
+        return "(".concat(baseNum, "*", baseNum, "*", baseNum, ")");
+      });
       this.setState({
-        sequence: res + "="
+        sequence: res + "=",
+        result: eval(resTemp)
       });
     }
-    document.querySelector('div.history').classList.remove('hide');
+    document.querySelector("div.history").classList.remove("hide");
   }
   //C function
   clear() {
@@ -160,37 +173,43 @@ class CalculatorApp extends React.Component {
       }
     } //If press x²
     else if (val === "x2") {
-      if (res[res.length - 1] === "³") {
-        this.setState({
-          result: res.slice(0, -1) + "²",
-          temp: ""
-        });
-      } else if (res[res.length - 1] === "²") {
-      } else {
-        this.setState({
-          result: "(".concat(res,")","²"),
-          temp: ""
-        });
+      if (res !== "0") {
+        if (res[res.length - 1] === "³") {
+          this.setState({
+            result: res.slice(0, -1) + "²",
+            temp: ""
+          });
+        } else if (res[res.length - 1] === "²") {
+        } else {
+          this.setState({
+            result: "(".concat(res, ")", "²"),
+            temp: ""
+          });
+        }
       }
     } //If press x³
     else if (val === "x3") {
-      if (res[res.length - 1] === "²") {
-        this.setState({
-          result: res.slice(0, -1) + "³",
-          temp: ""
-        });
-      } else if (res[res.length - 1] === "³") {
-      } else {
-        this.setState({
-          result: "(".concat(res,")","³"),
-          temp: ""
-        });
+      if (res !== "0") {
+        if (res[res.length - 1] === "²") {
+          this.setState({
+            result: res.slice(0, -1) + "³",
+            temp: ""
+          });
+        } else if (res[res.length - 1] === "³") {
+        } else {
+          this.setState({
+            result: "(".concat(res, ")", "³"),
+            temp: ""
+          });
+        }
       }
     } //If press √x
     else if (val === "√") {
-      this.setState({
-        result: "√" + res
-      });
+      if (res !== "0") {
+        this.setState({
+          result: "√" + res
+        });
+      }
     } //If press 1/x
     else if (val === "1/x") {
       if (res !== "0") {
@@ -248,11 +267,11 @@ class CalculatorApp extends React.Component {
     }
   }
   //Function to handle when X button clicked
-  handleXButtonClick(){
+  handleXButtonClick() {
     this.setState({
       history: []
     });
-    document.querySelector('div.history').classList.add('hide');
+    document.querySelector("div.history").classList.add("hide");
     this.clear();
   }
   //Render method
@@ -268,6 +287,7 @@ class CalculatorApp extends React.Component {
           <div className="calculator-body">
             <DisplaySequenceComponent sequence={this.state.sequence} />
             <DisplayResultComponent result={this.state.result} />
+            <h2>By Tony Vu</h2>
             <div className="row">
               <button className="cube" value="x3" onClick={this.handleClick}>
                 x³
@@ -318,7 +338,10 @@ class CalculatorApp extends React.Component {
             </div>
           </div>
           {/*History Pane to display memory result after clicking =*/}
-          <HistoryPaneComponent history={this.state.history} onXButtonClick={this.handleXButtonClick}/>
+          <HistoryPaneComponent
+            history={this.state.history}
+            onXButtonClick={this.handleXButtonClick}
+          />
         </div>
       </div>
     );
@@ -340,7 +363,7 @@ class DisplayResultComponent extends React.Component {
     let result = this.props.result;
     return (
       <div className="result">
-        <input value={result} type="tel" maxLength="9" disabled autoFocus/>
+        <input value={result} type="text" maxLength="9" disabled autoFocus />
       </div>
     );
   }
@@ -407,21 +430,21 @@ class HistoryPaneComponent extends React.Component {
     const historyItemsData = this.props.history;
     const historyItemsComponentList = historyItemsData.map((item, i) => {
       return (
-        <HistoryItem
-          key={i}
-          sequence={item.hisSeq}
-          result={item.hisRes}
-        />
+        <HistoryItem key={i} sequence={item.hisSeq} result={item.hisRes} />
       );
     });
     return (
       <div className="history hide">
         <div className="history-title">
           <h2>Memory</h2>
-          <button onClick={this.props.onXButtonClick} className="reset-memory" title="Clear Memory" >
+          <button
+            onClick={this.props.onXButtonClick}
+            className="reset-memory"
+            title="Clear Memory"
+          >
             X
           </button>
-        </div> 
+        </div>
         {historyItemsComponentList}
       </div>
     );

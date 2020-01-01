@@ -23,12 +23,56 @@
 }
 
 #root div .calculator-container .calculator-body{
-  width: 216px;
+  width: 225px;
   padding: 10px;
   border: 3px solid gray;
   border-radius: 7px;
   background-color: #232931;
   margin-right: 10px;
+}
+
+#root div .calculator-container .calculator-body h2{
+  color: rgb(233, 231, 231);
+  padding: 5px 0;
+}
+div.sequence{
+  width: 224px;
+  height: 1.5em;
+  font-size: 1em;
+  text-align: right;
+  padding-bottom: 5px;
+  color: gray;
+  border-left: thin solid rgb(206, 206, 206);
+  border-right: thin solid rgb(206, 206, 206);
+  border-top: thin solid rgb(206, 206, 206);
+  border-radius: 4px 4px 0 0;
+  background-color: white;
+}
+div.sequence p{
+  text-align: right;
+  width: 211px;
+  padding-right: 5px;
+}
+
+.result{
+  width: 224px;
+  height: 3em;
+  border-left: thin solid rgb(206, 206, 206);
+  border-right: thin solid rgb(206, 206, 206);
+  border-bottom: thin solid rgb(206, 206, 206);
+  border-radius: 0 0 4px 4px;
+  background-color: white;
+}
+
+div.result input{
+  width: 215px;
+  font-size: 1.8em;
+  border: none;
+  background-color: transparent;
+  text-align: right;
+  color: black;
+  padding-right: 5px;
+  padding-top: 10px;
 }
 
 #root div .calculator-container .history{
@@ -69,13 +113,13 @@
 }
 
 .history-item p.history-sequence {
-  font-size: 1em;
+  font-size: 0.8em;
   color: gray;
   text-align: right;
 }
 
 .history-item p.history-result{
-  font-size: 1.7em;
+  font-size: 1.4em;
   text-align: right;
 }
 
@@ -85,7 +129,7 @@ button{
   height: 50px;
   border: none;
   cursor: pointer;
-  margin: 2px;
+  margin: 3px;
   font-weight: bold;
   font-size: 1.5em;
 }
@@ -110,46 +154,6 @@ button.other{
   color: #f2f7ff;
 }
 
-div.sequence{
-  width: 216px;
-  height: 1.5em;
-  font-size: 1em;
-  text-align: right;
-  padding-bottom: 5px;
-  color: gray;
-  border-left: thin solid rgb(206, 206, 206);
-  border-right: thin solid rgb(206, 206, 206);
-  border-top: thin solid rgb(206, 206, 206);
-  border-radius: 4px 4px 0 0;
-  background-color: white;
-}
-div.sequence p{
-  text-align: right;
-  width: 211px;
-  padding-right: 5px;
-}
-
-.result{
-  width: 216px;
-  height: 3em;
-  margin-bottom: 50px; 
-  border-left: thin solid rgb(206, 206, 206);
-  border-right: thin solid rgb(206, 206, 206);
-  border-bottom: thin solid rgb(206, 206, 206);
-  border-radius: 0 0 4px 4px;
-  background-color: white;
-}
-
-div.result input{
-  width: 211px;
-  font-size: 1.8em;
-  border: none;
-  background-color: transparent;
-  text-align: right;
-  color: black;
-  padding-right: 5px;
-  padding-top: 10px;
-}
 
 .hide {
   display: none;
