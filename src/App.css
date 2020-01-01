@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#root div{
+  text-align: center;
+}
+#root div h1{
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 3.5em;
+}
+
+#root div h1 span{
+  color: gray;
+}
+
+#root div .calculator-container{
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  display: flex;
+}
+
+#root div .calculator-container .calculator-body{
+  width: 216px;
+  padding: 10px;
+  border: 3px solid gray;
+  border-radius: 7px;
+  background-color: #232931;
+  margin-right: 10px;
+}
+
+#root div .calculator-container .history{
+  border: 3px solid gray;
+  border-radius: 7px;
+  height: 474.6px;
+  overflow: auto;
+  width: 236px;
+}
+#root div .calculator-container .history div.history-title {
+  display: inline-flex;
+  margin-bottom: 5px;
+  width: 100%;
+  text-align: right;
+}
+#root div .calculator-container .history div h2{
+  font-size: 1em;
+  color: gray;
+  padding-right: 5px;
+  padding-left: 140px;
+}
+
+#root div .calculator-container .history div button{
+  font-size: 1em;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(233, 231, 231);
+  border-radius: 4px;
+  color: gray;
+}
+.history-item{
+  margin-bottom: 20px;
+  padding: 3px;
+}
+.history-item:hover{
+  background-color: rgb(233, 231, 231);
+  cursor: pointer;
+}
+
+.history-item p.history-sequence {
+  font-size: 1em;
+  color: gray;
+  text-align: right;
+}
+
+.history-item p.history-result{
+  font-size: 1.7em;
+  text-align: right;
+}
+
+
+button{
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  margin: 2px;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+button.number{
+  background-color: #fabc41;
+  color: #393e46;
+}
+
+button.operator{
+  background-color: #c72767;
+  color:#f2f7ff;
+}
+
+button.equal{
+  background-color: #c72767;
+  color:#f2f7ff;
+}
+
+button.other{
+  background-color: #ff971d;
+  color: #f2f7ff;
+}
+
+div.sequence{
+  width: 216px;
+  height: 1.5em;
+  font-size: 1em;
+  text-align: right;
+  padding-bottom: 5px;
+  color: gray;
+  border-left: thin solid rgb(206, 206, 206);
+  border-right: thin solid rgb(206, 206, 206);
+  border-top: thin solid rgb(206, 206, 206);
+  border-radius: 4px 4px 0 0;
+  background-color: white;
+}
+div.sequence p{
+  text-align: right;
+}
+
+.result{
+  width: 216px;
+  height: 3em;
+  margin-bottom: 50px; 
+  border-left: thin solid rgb(206, 206, 206);
+  border-right: thin solid rgb(206, 206, 206);
+  border-bottom: thin solid rgb(206, 206, 206);
+  border-radius: 0 0 4px 4px;
+  background-color: white;
+}
+
+div.result input{
+  width: 216px;
+  font-size: 2.5em;
+  border: none;
+  background-color: transparent;
+  text-align: right;
+  color: black;
+}
+
+.hide {
+  display: none;
+}
