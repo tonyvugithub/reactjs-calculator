@@ -1,4 +1,4 @@
-This project was a static React project to understand the basics of web development using components
+This project was a static React project built to learn about the basics of web development using components
 
 Link to deployment: [https://tonyvugithub.github.io/reactjs-calculator/](https://tonyvugithub.github.io/reactjs-calculator/)
 
